@@ -1,32 +1,28 @@
-# React + TypeScript + Vite
+# LoL Death Map — Home Page
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Landing/marketing page for **LoL Death Map**, a League of Legends death heatmap tool that visualizes where a summoner dies most frequently on Summoner's Rift across recent matches.
 
-Currently, two official plugins are available:
+This is the front-facing entry point of the project — a hero section, a "how it works" explainer, and a search bar that hands off a Riot ID + region to the main app for the actual heatmap results.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tech stack
 
-## React Compiler
+- React + TypeScript
+- Vite (build tool/dev server)
+- Oxlint (linting)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Relationship to the main app
 
-## Expanding the Oxlint configuration
+This is a **separate project** from the main LoL Death Map app (the vanilla JS/Express app that renders the heatmap). This page links out to that app once a search is submitted — it does not render the map/results itself.
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## Development
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Build
+
+```bash
+npm run build
+```
