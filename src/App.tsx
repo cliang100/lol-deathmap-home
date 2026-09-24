@@ -1,14 +1,44 @@
+import { useState } from 'react'
 import './App.css'
 
 function App() {
+  const [riotId, setRiotId] = useState('')
+  const [region, setRegion] = useState('na1')
+
+  const handleSearch = () => {
+    const [gameName, tagLine] = riotId.split('#').map((s) => s.trim())
+    if (!gameName || !tagLine) return
+    window.location.href = `http://localhost:3000/index.html?riotId=${gameName}&tag=${tagLine}&region=${region}`
+  }
+
   return (
     <>
       <section className="hero">
         <h1>LoL Death Map</h1>
         <p>See exactly where you keep dying on Summoner's Rift.</p>
-        <a href="http://localhost:3000" className="cta-button">
-          Try it now
-        </a>
+
+        <div className="search-bar">
+          <input
+            type="text"
+            placeholder="Game name + #NA1"
+            value={riotId}
+            onChange={(e) => setRiotId(e.target.value)}
+          />
+          <select value={region} onChange={(e) => setRegion(e.target.value)}>
+            <option value="na1">NA</option>
+            <option value="euw1">EUW</option>
+            <option value="eun1">EUNE</option>
+            <option value="kr">KR</option>
+            <option value="jp1">JP</option>
+            <option value="br1">BR</option>
+            <option value="la1">LAN</option>
+            <option value="la2">LAS</option>
+            <option value="oc1">OCE</option>
+            <option value="tr1">TR</option>
+            <option value="ru">RU</option>
+          </select>
+          <button onClick={handleSearch}>Search</button>
+        </div>
       </section>
 
       <section className="how-it-works">
