@@ -20,10 +20,11 @@ body {
 .hero h1 {
     font-family: 'Oswald', sans-serif;
     font-weight: 600;
+    font-size: 42px;
     letter-spacing: 0.5px;
+    margin-bottom: 4px;
     border-bottom: 2px solid #E8B34C;
     padding-bottom: 12px;
-    display: inline-block;
 }
 
 .hero p {

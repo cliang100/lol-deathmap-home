@@ -4,10 +4,22 @@ import './App.css'
 function App() {
   const [riotId, setRiotId] = useState('')
   const [region, setRegion] = useState('na1')
+  const [isSearching, setIsSearching] = useState(false)
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     const [gameName, tagLine] = riotId.split('#').map((s) => s.trim())
     if (!gameName || !tagLine) return
+
+    setIsSearching(true)
+    const res = await fetch(`http://localhost:3000/api/deaths/${region}/${gameName}/${tagLine}`)
+
+    if (!res.ok) {
+        setIsSearching(false)
+        return
+    }
+
+    const deaths = await res.json()
+    sessionStorage.setItem('deathData', JSON.stringify(deaths))
     window.location.href = `http://localhost:3000/index.html?riotId=${gameName}&tag=${tagLine}&region=${region}`
   }
 
@@ -37,7 +49,9 @@ function App() {
             <option value="tr1">TR</option>
             <option value="ru">RU</option>
           </select>
-          <button onClick={handleSearch}>Search</button>
+          <button onClick={handleSearch} disabled={isSearching}>
+            {isSearching ? 'Loading...' : 'Search'}
+          </button>
         </div>
       </section>
 
