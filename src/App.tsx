@@ -1,13 +1,18 @@
 import { useState } from 'react'
 import './App.css'
 
+export function parseRiotId(raw: string): { gameName: string; tagLine: string } {
+  const [gameName, tagLine] = raw.split('#').map((s) => s.trim())
+  return { gameName, tagLine }
+}
+
 function App() {
   const [riotId, setRiotId] = useState('')
   const [region, setRegion] = useState('na1')
   const [isSearching, setIsSearching] = useState(false)
 
   const handleSearch = async () => {
-    const [gameName, tagLine] = riotId.split('#').map((s) => s.trim())
+    const { gameName, tagLine } = parseRiotId(riotId)
     if (!gameName || !tagLine) return
 
     setIsSearching(true)
