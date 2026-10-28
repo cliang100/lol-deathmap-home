@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css'
+import { buildResultsUrl } from './redirect'
 
 export function parseRiotId(raw: string):
   | { ok: true; gameName: string; tagLine: string }
@@ -35,24 +36,18 @@ export function parseRiotId(raw: string):
 function App() {
   const [riotId, setRiotId] = useState('')
   const [region, setRegion] = useState('na1')
-  const [isSearching, setIsSearching] = useState(false)
 
-  const handleSearch = async () => {
+  const handleSearch = () => {
     const parsed = parseRiotId(riotId)
     if (!parsed.ok) return
     const { gameName, tagLine } = parsed
 
-    setIsSearching(true)
-    const res = await fetch(`http://localhost:3000/api/deaths/${region}/${gameName}/${tagLine}`)
-
-    if (!res.ok) {
-        setIsSearching(false)
-        return
-    }
-
-    const deaths = await res.json()
-    sessionStorage.setItem('deathData', JSON.stringify(deaths))
-    window.location.href = `http://localhost:3000/index.html?riotId=${gameName}&tag=${tagLine}&region=${region}`
+    window.location.href = buildResultsUrl(
+      import.meta.env.VITE_RESULTS_URL,
+      gameName,
+      tagLine,
+      region,
+    )
   }
 
   return (
@@ -81,8 +76,8 @@ function App() {
             <option value="tr1">TR</option>
             <option value="ru">RU</option>
           </select>
-          <button onClick={handleSearch} disabled={isSearching}>
-            {isSearching ? 'Loading...' : 'Search'}
+          <button onClick={handleSearch} type="button">
+            Search
           </button>
         </div>
       </section>
