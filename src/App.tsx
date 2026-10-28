@@ -36,10 +36,16 @@ export function parseRiotId(raw: string):
 function App() {
   const [riotId, setRiotId] = useState('')
   const [region, setRegion] = useState('na1')
+  const [error, setError] = useState('')
 
-  const handleSearch = () => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
     const parsed = parseRiotId(riotId)
-    if (!parsed.ok) return
+    if (!parsed.ok) {
+      setError(parsed.error)
+      return
+    }
+    setError('')
     const { gameName, tagLine } = parsed
 
     window.location.href = buildResultsUrl(
@@ -57,28 +63,38 @@ function App() {
         <p>See exactly where you keep dying on Summoner's Rift.</p>
 
         <div className="search-bar">
-          <input
-            type="text"
-            placeholder="Game name + #NA1"
-            value={riotId}
-            onChange={(e) => setRiotId(e.target.value)}
-          />
-          <select value={region} onChange={(e) => setRegion(e.target.value)}>
-            <option value="na1">NA</option>
-            <option value="euw1">EUW</option>
-            <option value="eun1">EUNE</option>
-            <option value="kr">KR</option>
-            <option value="jp1">JP</option>
-            <option value="br1">BR</option>
-            <option value="la1">LAN</option>
-            <option value="la2">LAS</option>
-            <option value="oc1">OCE</option>
-            <option value="tr1">TR</option>
-            <option value="ru">RU</option>
-          </select>
-          <button onClick={handleSearch} type="button">
-            Search
-          </button>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              placeholder="Name#TAG"
+              value={riotId}
+              onChange={(e) => {
+                setRiotId(e.target.value)
+                setError('')
+              }}
+              aria-invalid={!!error}
+              {...(error ? { 'aria-describedby': 'riot-id-error' } : {})}
+            />
+            {error && (
+              <p id="riot-id-error" role="alert">
+                {error}
+              </p>
+            )}
+            <select value={region} onChange={(e) => setRegion(e.target.value)}>
+              <option value="na1">NA</option>
+              <option value="euw1">EUW</option>
+              <option value="eun1">EUNE</option>
+              <option value="kr">KR</option>
+              <option value="jp1">JP</option>
+              <option value="br1">BR</option>
+              <option value="la1">LAN</option>
+              <option value="la2">LAS</option>
+              <option value="oc1">OCE</option>
+              <option value="tr1">TR</option>
+              <option value="ru">RU</option>
+            </select>
+            <button type="submit">Search</button>
+          </form>
         </div>
       </section>
 
