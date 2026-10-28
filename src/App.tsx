@@ -62,41 +62,55 @@ function App() {
         <h1>LoL Death Map</h1>
         <p>See exactly where you keep dying on Summoner's Rift.</p>
 
-        <div className="search-bar">
-          <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              placeholder="Name#TAG"
-              value={riotId}
-              onChange={(e) => {
-                setRiotId(e.target.value)
-                setError('')
-              }}
-              aria-invalid={!!error}
-              {...(error ? { 'aria-describedby': 'riot-id-error' } : {})}
-            />
-            {error && (
-              <p id="riot-id-error" role="alert">
-                {error}
-              </p>
-            )}
-            <select value={region} onChange={(e) => setRegion(e.target.value)}>
-              <option value="na1">NA</option>
-              <option value="euw1">EUW</option>
-              <option value="eun1">EUNE</option>
-              <option value="kr">KR</option>
-              <option value="jp1">JP</option>
-              <option value="br1">BR</option>
-              <option value="la1">LAN</option>
-              <option value="la2">LAS</option>
-              <option value="oc1">OCE</option>
-              <option value="tr1">TR</option>
-              <option value="ru">RU</option>
-            </select>
-            <button type="submit">Search</button>
-          </form>
-        </div>
-      </section>
+        <form className="search-wrap" onSubmit={handleSubmit}>
+  <div className="search-bar">
+    <select aria-label="Region" value={region} onChange={(e) => setRegion(e.target.value)}>
+      <option value="na1">NA</option>
+      <option value="euw1">EUW</option>
+      <option value="eun1">EUNE</option>
+      <option value="kr">KR</option>
+      <option value="jp1">JP</option>
+      <option value="br1">BR</option>
+      <option value="la1">LAN</option>
+      <option value="la2">LAS</option>
+      <option value="oc1">OCE</option>
+      <option value="tr1">TR</option>
+      <option value="ru">RU</option>
+    </select>
+    <input
+      aria-label="Riot ID"
+      type="text"
+      placeholder="Name#TAG"
+      value={riotId}
+      onChange={(e) => {
+        setRiotId(e.target.value)
+        setError("")
+      }}
+      aria-invalid={!!error}
+      {...(error ? { "aria-describedby": "riot-id-error" } : {})}
+    />
+    <button
+      type="submit"
+      aria-label="Search"
+    >
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <circle cx="11" cy="11" r="7" />
+        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+      </svg>
+    </button>
+  </div>
+  {error && <p id="riot-id-error" className="search-error" role="alert">{error}</p>}
+</form>      </section>
 
       <section className="how-it-works">
         <h2>How it works</h2>
