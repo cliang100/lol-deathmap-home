@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import { buildResultsUrl } from './redirect'
 import { parseRiotId } from './parseRiotId'
+import previewUrl from './assets/preview.png'
 
 function App() {
   const [riotId, setRiotId] = useState('')
@@ -81,6 +82,10 @@ function App() {
   </div>
   {error && <p id="riot-id-error" className="search-error" role="alert">{error}</p>}
 </form>      </section>
+
+      <section className="preview">
+        <img src={previewUrl} alt="Death heatmap on the results page, with match history and stats" />
+      </section>
 
       <section className="features">
         <div className="feature-card">
