@@ -25,4 +25,17 @@ describe('buildResultsUrl', () => {
       'http://localhost:3000/?riotId=Faker&tag=KR1&region=na1',
     );
   });
+
+  it('still works with https', () => {
+    expect(buildResultsUrl('https://results.example.com', 'Faker', 'KR1', 'na1')).toBe(
+      'https://results.example.com/?riotId=Faker&tag=KR1&region=na1',
+    );
+  });
+
+  it.each(['javascript:alert(1)', 'data:text/html,x', 'not a url'])(
+    'rejects %s',
+    (baseUrl) => {
+      expect(() => buildResultsUrl(baseUrl, 'Faker', 'KR1', 'na1')).toThrow();
+    },
+  );
 });
