@@ -181,3 +181,41 @@ body {
   line-height: 1.6;
   color: var(--muted);
 }
+
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  width: min(900px, 100%);
+  margin: 56px auto 0;
+}
+
+.feature-card {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  text-align: left;
+}
+
+.feature-card h3 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--accent);
+  margin: 0 0 8px;
+}
+
+.feature-card p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+@media (max-width: 600px) {
+  .features {
+    flex-direction: column;
+  }
+}

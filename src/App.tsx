@@ -82,6 +82,21 @@ function App() {
   {error && <p id="riot-id-error" className="search-error" role="alert">{error}</p>}
 </form>      </section>
 
+      <section className="features">
+        <div className="feature-card">
+          <h3>Death heatmap</h3>
+          <p>See where on the map your deaths cluster.</p>
+        </div>
+        <div className="feature-card">
+          <h3>Per-game filter</h3>
+          <p>Pick any match to see only that game's deaths.</p>
+        </div>
+        <div className="feature-card">
+          <h3>Stats at a glance</h3>
+          <p>Total deaths, most common killer, win rate, and average time of death.</p>
+        </div>
+      </section>
+
       <section className="how-it-works">
         <h2>How it works</h2>
         <div className="steps-row">
