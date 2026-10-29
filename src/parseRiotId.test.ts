@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { parseRiotId } from './App'
+import { parseRiotId } from './parseRiotId'
 
 describe('parseRiotId', () => {
   it('accepts a valid input', () => {
