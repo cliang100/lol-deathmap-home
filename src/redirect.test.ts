@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { buildResultsUrl } from './redirect';
+import { buildResultsUrl, buildSampleUrl } from './redirect';
 
 describe('buildResultsUrl', () => {
   it('builds a simple results URL', () => {
@@ -38,4 +38,14 @@ describe('buildResultsUrl', () => {
       expect(() => buildResultsUrl(baseUrl, 'Faker', 'KR1', 'na1')).toThrow();
     },
   );
+});
+
+describe('buildSampleUrl', () => {
+  it('links to the sample page', () => {
+    expect(buildSampleUrl('https://results.example.com/')).toBe('https://results.example.com/?sample=1');
+  });
+
+  it('rejects non-http URLs', () => {
+    expect(() => buildSampleUrl('javascript:alert(1)')).toThrow();
+  });
 });

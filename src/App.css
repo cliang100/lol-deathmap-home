@@ -134,6 +134,14 @@ body {
   color: var(--loss);
 }
 
+.sample-link {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 4px;
+  font-size: 14px;
+  color: var(--accent);
+}
+
 .how-it-works {
   max-width: 700px;
   margin: 80px auto;

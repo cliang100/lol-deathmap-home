@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import { buildResultsUrl } from './redirect'
+import { buildResultsUrl, buildSampleUrl } from './redirect'
 import { parseRiotId } from './parseRiotId'
 import previewUrl from './assets/preview.webp'
 
@@ -81,7 +81,11 @@ function App() {
     </button>
   </div>
   {error && <p id="riot-id-error" className="search-error" role="alert">{error}</p>}
-</form>      </section>
+</form>
+        <a className="sample-link" href={buildSampleUrl(import.meta.env.VITE_RESULTS_URL)}>
+          No Riot ID? Try sample data
+        </a>
+      </section>
 
       <section className="preview">
         <img src={previewUrl} width={1736} height={1513} alt="Results page with sample data: death heatmap, match history and stats" />
