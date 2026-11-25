@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import { buildResultsUrl } from './redirect'
 import { parseRiotId } from './parseRiotId'
-import previewUrl from './assets/preview.png'
+import previewUrl from './assets/preview.webp'
 
 function App() {
   const [riotId, setRiotId] = useState('')
@@ -84,7 +84,7 @@ function App() {
 </form>      </section>
 
       <section className="preview">
-        <img src={previewUrl} alt="Death heatmap on the results page, with match history and stats" />
+        <img src={previewUrl} width={1736} height={1513} alt="Results page with sample data: death heatmap, match history and stats" />
       </section>
 
       <section className="features">
