@@ -101,11 +101,11 @@ function App() {
       <section className="features">
         <div className="feature-card">
           <h2>Death heatmap</h2>
-          <p>See where on the map your deaths cluster.</p>
+          <p>See where on the map your deaths cluster, and which area is worst.</p>
         </div>
         <div className="feature-card">
-          <h2>Per-game filter</h2>
-          <p>Pick any match to see only that game's deaths.</p>
+          <h2>Filter by game or phase</h2>
+          <p>Pick a single match, or show only early, mid or late deaths.</p>
         </div>
         <div className="feature-card">
           <h2>Stats at a glance</h2>
@@ -122,7 +122,7 @@ function App() {
           </div>
           <div className="step">
             <p className="step-number">2</p>
-            <p>We pull your recent SR games</p>
+            <p>We pull your recent Summoner's Rift games</p>
           </div>
           <div className="step">
             <p className="step-number">3</p>

@@ -1,6 +1,10 @@
 # LoL Death Map — Home Page
 
+[Live site](https://lol-deathmap.netlify.app)
+
 Landing page with a search bar that redirects to the results page. It makes no API calls.
+
+The sample link goes to `<VITE_RESULTS_URL>/?sample=1`.
 
 On submit it redirects to `<VITE_RESULTS_URL>/?riotId=<name>&tag=<tag>&region=<region>`.
 
