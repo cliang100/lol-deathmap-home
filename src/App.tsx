@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import './App.css'
 import { buildResultsUrl, buildSampleUrl } from './redirect'
 import { parseRiotId } from './parseRiotId'
@@ -8,12 +8,14 @@ function App() {
   const [riotId, setRiotId] = useState('')
   const [region, setRegion] = useState('na1')
   const [error, setError] = useState('')
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     const parsed = parseRiotId(riotId)
     if (!parsed.ok) {
       setError(parsed.error)
+      inputRef.current?.focus()
       return
     }
     setError('')
@@ -29,6 +31,7 @@ function App() {
 
   return (
     <>
+      <main>
       <section className="hero">
         <h1>LoL Death Map</h1>
         <p>See exactly where you keep dying on Summoner's Rift.</p>
@@ -49,8 +52,12 @@ function App() {
       <option value="ru">RU</option>
     </select>
     <input
+      ref={inputRef}
       aria-label="Riot ID"
       type="text"
+      autoComplete="off"
+      autoCapitalize="none"
+      spellCheck={false}
       placeholder="Name#TAG"
       value={riotId}
       onChange={(e) => {
@@ -93,15 +100,15 @@ function App() {
 
       <section className="features">
         <div className="feature-card">
-          <h3>Death heatmap</h3>
+          <h2>Death heatmap</h2>
           <p>See where on the map your deaths cluster.</p>
         </div>
         <div className="feature-card">
-          <h3>Per-game filter</h3>
+          <h2>Per-game filter</h2>
           <p>Pick any match to see only that game's deaths.</p>
         </div>
         <div className="feature-card">
-          <h3>Stats at a glance</h3>
+          <h2>Stats at a glance</h2>
           <p>Total deaths, most common killer, win rate, and average time of death.</p>
         </div>
       </section>
@@ -123,6 +130,7 @@ function App() {
           </div>
         </div>
       </section>
+      </main>
       <footer className="site-footer">
         <p>
           LoL Death Map isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.
